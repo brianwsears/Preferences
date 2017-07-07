@@ -1,57 +1,33 @@
-# ==========================================================
-#
-# PERSONAL $HOME/.bashrc file.
-# By Brian Sears
-#
-# This script is executed every time a new Terminal session 
-# is started. It is referenced by the .bash_profile script
-# that is executed during login.
-#
-# ==========================================================
-
-############################################################
-# Add things to the Path
-############################################################
-export PATH=$PATH
+# Aliases
+alias tmux="tmux -2"
+alias grep='grep --color=auto'
+alias ls='ls -G'
 
 
-############################################################
+# Adding things to my path
+export PATH=.:$PATH
+
+
+# Carfax specific vars
+export PROMOTION_LEVEL=LOCAL
+
+
 # System settings
-############################################################
 export TERM=xterm-color
 
 
-############################################################
 # Load custom functions
-############################################################
 source ~/.bash_functions
 
 
-############################################################
-# Set GRADLE_HOME
-############################################################
-export GRADLE_HOME=/Users/Development/Software/Gradle/2.3
-export PATH=$PATH:$GRADLE_HOME/bin
-
-
-############################################################
-# Set GRAILS_HOME
-############################################################
-export GRAILS_HOME=/Users/Development/Software/Grails/3.0.1
-export PATH=$PATH:$GRAILS_HOME/bin
-
-
-############################################################
 # Load git autocomplete script
-############################################################
 if [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
 fi
 
 
-############################################################
+# Stuff to make the prompt more pleasing
 # All colors are defined to make it easier to change.
-############################################################
 RED="\[\033[0;31m\]"
 RED_BOLD="\[\033[1;31m\]"
 GREEN="\[\033[0;32m\]"
@@ -68,9 +44,7 @@ NO_COLOR="\[\033[0m\]"
 export PS1="$MAGENTA_BOLD\u@\h$CYAN_BOLD:\w$YELLOW_BOLD\$(parse_git_branch)$NO_COLOR\$ "
 
 
-############################################################
 # Set default Java Version
-############################################################
 function set_jdk() {
     if [ $# -ne 0 ]; then
 	remove_from_path '/System/Library/Frameworks/JavaVM.framework/Home/bin'
@@ -89,3 +63,14 @@ function remove_from_path() {
 
 # Change this to whichever version of JDK you want as default
 set_jdk 1.8
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+[[ -s "/Users/briansears/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/briansears/.sdkman/bin/sdkman-init.sh"
+## cfx-cli
+export PATH=$PATH:/Users/briansears/.cfx/bin:/Users/briansears/cfx/.meta/bin
+## end cfx-cli
+
+
+export NVM_DIR="/Users/briansears/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
